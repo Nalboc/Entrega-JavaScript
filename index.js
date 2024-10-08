@@ -1,8 +1,8 @@
 let balance = 0;
 let monto = 0;
 let encendido = true; //booleano para empezar y finalizar el bucle while
-let opciones = "\n1-Balance\n2-Retirar dinero\n3-Depositar dinero\n4-terminar";
-let inicio = "Bienvenido a tu deposito de dinero. Aqui puedes:\n1-Mirar balance\n2-Retirar dinero\n3-Depositar dinero\n Elige la opcion numerica deseada.";
+let opciones = "\n1-Balance\n2-Retirar dinero\n3-Depositar dinero\n4-Salir";
+let inicio = "Bienvenido a tu deposito de dinero. Aqui puedes:" + opciones + "\nElige la opcion numerica deseada.";
 let presentacion = prompt(inicio);//Contiene el mensaje inicial y es la variable que controla que opcion elige el usuario en todo momento.
 while(encendido == true)//Bucle que mantiene al usuario con las opciones disponibles en todo momento mientras el booleano encendido sea true.
 {
@@ -22,6 +22,9 @@ while(encendido == true)//Bucle que mantiene al usuario con las opciones disponi
             transaccion(presentacion,monto);
             lista();
             break;
+        case "4"://Finalizar bucle
+            encendido = false;
+        break
         default://Cualquier entrada fuera de las opciones
             alert("Orden desconocida");
             lista();
