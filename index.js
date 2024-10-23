@@ -1,4 +1,4 @@
-let balance = 0;
+/*let balance = 0;
 let monto = 0;
 let encendido = true; //booleano para empezar y finalizar el bucle while
 let opciones = "\n1-Balance\n2-Retirar dinero\n3-Depositar dinero\n4-Salir";
@@ -74,4 +74,12 @@ function lista() //funcion para mostrar las opciones y recibir respuesta del usu
             encendido = false;
             break;
     }
-}
+}*/
+
+//---Segunda entrega---
+
+let inicio = "Bienvenido al banco AON(AhorraONunca)";
+let ingresar_usuario = "Ingresa nombre de usuario";
+let ingresar_contraseña = "Ingresa contraseña"
+let iniciar_crear_cuenta = prompt(inicio + "\n¿Ya tienes una cuenta?\n1-Iniciar sesion\n2-Crear cuenta");
+
