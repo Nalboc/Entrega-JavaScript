@@ -1,34 +1,59 @@
-/*let balance = 0;
+//---VARIABLES/LISTAS/OBJETOS---
+let balance = 0;
 let monto = 0;
 let encendido = true; //booleano para empezar y finalizar el bucle while
 let opciones = "\n1-Balance\n2-Retirar dinero\n3-Depositar dinero\n4-Salir";
-let inicio = "Bienvenido a tu deposito de dinero. Aqui puedes:" + opciones + "\nElige la opcion numerica deseada.";
-let presentacion = prompt(inicio);//Contiene el mensaje inicial y es la variable que controla que opcion elige el usuario en todo momento.
-while(encendido == true)//Bucle que mantiene al usuario con las opciones disponibles en todo momento mientras el booleano encendido sea true.
-{
-    switch (presentacion)//Recibe la eleccion del usuario ante las opciones mostradas. 
+let inicio = ["Bienvenido a tu deposito de dinero. Aqui puedes:" + opciones + "\nElige la opcion numerica deseada.","Bienvenido al banco AON(AhorraONunca)"];
+let ingresar_usuario = "Ingresa nombre de usuario";
+let ingresar_contraseña = "Ingresa contraseña"
+let iniciado = false;
+let registrados ={
+    usuario:"Pedro",
+    contraseña:"12",
+};
+//---VARIABLES/LISTAS/OBJETOS---
+let iniciar_crear_cuenta = prompt(inicio[1] + "\n¿Ya tienes una cuenta?\n1-Iniciar sesion\n2-Crear cuenta");
+while(iniciado == false)
     {
-        case "1"://Mirar balance
-            alert("Tu balance es de " + balance)
-            lista();//Funcion para regresar a ver las opciones disponibles
+        switch(iniciar_crear_cuenta){
+        case "1":
+            usuarios = prompt("Ingresa usuario");
+            contra = prompt("ingresa contraseña");
+            Registrados(usuarios, contra);
             break;
-        case "2"://Retirar
-            monto = prompt("Introduce el monto a retirar");
-            transaccion(presentacion,monto);//funcion que evalua dos argumentos del usuario.
-            lista();
+        case "2":
+            iniciado = true;
             break;
-        case "3"://Depositar
-            monto = prompt("Introduce el monto a depositar");
-            transaccion(presentacion,monto);
-            lista();
-            break;
-        case "4"://Finalizar bucle
-            encendido = false;
-        break
-        default://Cualquier entrada fuera de las opciones
-            alert("Orden desconocida");
-            lista();
-            break;
+        }
+    }
+if(iniciado==true){
+    let presentacion = prompt(inicio[0]);//Contiene el mensaje inicial y es la variable que controla que opcion elige el usuario en todo momento.
+    while(encendido == true)//Bucle que mantiene al usuario con las opciones disponibles en todo momento mientras el booleano encendido sea true.
+    {
+        switch (presentacion)//Recibe la eleccion del usuario ante las opciones mostradas. 
+        {
+            case "1"://Mirar balance
+                alert("Tu balance es de " + balance)
+                lista();//Funcion para regresar a ver las opciones disponibles
+                break;
+            case "2"://Retirar
+                monto = prompt("Introduce el monto a retirar");
+                transaccion(presentacion,monto);//funcion que evalua dos argumentos del usuario.
+                lista();
+                break;
+            case "3"://Depositar
+                monto = prompt("Introduce el monto a depositar");
+                transaccion(presentacion,monto);
+                lista();
+                break;
+            case "4"://Finalizar bucle
+                encendido = false;
+            break
+            default://Cualquier entrada fuera de las opciones
+                alert("Orden desconocida");
+                lista();
+                break;
+        }
     }
 }
 function transaccion(orden,monto) //funcion principal para el control de la variable balance y revision de la entrada del usuario
@@ -74,34 +99,16 @@ function lista() //funcion para mostrar las opciones y recibir respuesta del usu
             encendido = false;
             break;
     }
-}*/
-/*let lista =["pedro","papa","suarez"];
-for(let i =0;i<=2;i++){
-    alert(lista.at(i))
-}*/
-let inicio = "Bienvenido al banco AON(AhorraONunca)";
-let ingresar_usuario = "Ingresa nombre de usuario";
-let ingresar_contraseña = "Ingresa contraseña"
-let registrados ={
-    usuario:"pedro",
-    contraseña:"12",
-};
-let iniciar_crear_cuenta = prompt(inicio + "\n¿Ya tienes una cuenta?\n1-Iniciar sesion\n2-Crear cuenta");
-switch(iniciar_crear_cuenta){
-    case "1":
-        usuarios = prompt("Ingresa usuario");
-        contra = prompt("ingresa contraseña");
-        Registrados(usuarios, contra);
-        break;
-    case "2":
-        break;
 }
+
 function Registrados(usuario,contraseña){
     if(registrados.usuario == usuario && registrados.contraseña == contraseña){
-        alert("inicio completado");
+        alert("Bienvenido " + usuario);
+        iniciado = true;
     }
     else{
-        alert("no existe");
+        alert("Usuario o contraseña invalidos");
+        iniciar_crear_cuenta = prompt(inicio[1] + "\n¿Ya tienes una cuenta?\n1-Iniciar sesion\n2-Crear cuenta");
         console.log(registrados);
     }
     
