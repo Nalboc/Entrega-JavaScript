@@ -75,11 +75,34 @@ function lista() //funcion para mostrar las opciones y recibir respuesta del usu
             break;
     }
 }*/
-
-//---Segunda entrega---
-
+/*let lista =["pedro","papa","suarez"];
+for(let i =0;i<=2;i++){
+    alert(lista.at(i))
+}*/
 let inicio = "Bienvenido al banco AON(AhorraONunca)";
 let ingresar_usuario = "Ingresa nombre de usuario";
 let ingresar_contraseña = "Ingresa contraseña"
+let registrados ={
+    usuario:"pedro",
+    contraseña:"12",
+};
 let iniciar_crear_cuenta = prompt(inicio + "\n¿Ya tienes una cuenta?\n1-Iniciar sesion\n2-Crear cuenta");
-
+switch(iniciar_crear_cuenta){
+    case "1":
+        usuarios = prompt("Ingresa usuario");
+        contra = prompt("ingresa contraseña");
+        Registrados(usuarios, contra);
+        break;
+    case "2":
+        break;
+}
+function Registrados(usuario,contraseña){
+    if(registrados.usuario == usuario && registrados.contraseña == contraseña){
+        alert("inicio completado");
+    }
+    else{
+        alert("no existe");
+        console.log(registrados);
+    }
+    
+}
