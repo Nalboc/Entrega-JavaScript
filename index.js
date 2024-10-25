@@ -1,115 +1,56 @@
-//---VARIABLES/LISTAS/OBJETOS---
-let balance = 0;
-let monto = 0;
-let encendido = true; //booleano para empezar y finalizar el bucle while
-let opciones = "\n1-Balance\n2-Retirar dinero\n3-Depositar dinero\n4-Salir";
-let inicio = ["Bienvenido a tu deposito de dinero. Aqui puedes:" + opciones + "\nElige la opcion numerica deseada.","Bienvenido al banco AON(AhorraONunca)"];
-let ingresar_usuario = "Ingresa nombre de usuario";
-let ingresar_contraseña = "Ingresa contraseña"
-let iniciado = false;
-let registrados ={
-    usuario:"Pedro",
-    contraseña:"12",
+mochila_abierta = true;
+let mochila = {
+    espacio: 5
 };
-//---VARIABLES/LISTAS/OBJETOS---
-let iniciar_crear_cuenta = prompt(inicio[1] + "\n¿Ya tienes una cuenta?\n1-Iniciar sesion\n2-Crear cuenta");
-while(iniciado == false)
+let cosas_cargadas = [];
+while(mochila.espacio >0){   
+let cargar_mochila =prompt("Llena la mochila con lo que quieras\n Espacio de mochila: " + mochila.espacio)
+mochila.espacio -= 1;
+cosas_cargadas.push(cargar_mochila);
+}
+alert("Ya no hay espacio, estas son las cosas que cargaste: " + cosas_cargadas)
+administrarMochila();
+function administrarMochila(){
+    while(mochila_abierta == true){
+        let opcion =prompt("¿Estas satisfecho con el contenido de tu mochila?\n1-Quitar algo\n2-Agregar algo\n3-Cerrar mochila")
+        opciones(opcion);
+    }
+}
+function quitarObjeto(){
+    let quitar = prompt("¿Que objeto quieres quitar?\n" + cosas_cargadas)
+    for(let i = mochila.espacio;i<=5;i++)
     {
-        switch(iniciar_crear_cuenta){
-        case "1":
-            usuarios = prompt("Ingresa usuario");
-            contra = prompt("ingresa contraseña");
-            Registrados(usuarios, contra);
-            break;
-        case "2":
-            iniciado = true;
+        if(cosas_cargadas[i] == quitar){
+            cosas_cargadas.splice(i,1)
+            alert("objeto eliminado")
             break;
         }
-    }
-if(iniciado==true){
-    let presentacion = prompt(inicio[0]);//Contiene el mensaje inicial y es la variable que controla que opcion elige el usuario en todo momento.
-    while(encendido == true)//Bucle que mantiene al usuario con las opciones disponibles en todo momento mientras el booleano encendido sea true.
-    {
-        switch (presentacion)//Recibe la eleccion del usuario ante las opciones mostradas. 
-        {
-            case "1"://Mirar balance
-                alert("Tu balance es de " + balance)
-                lista();//Funcion para regresar a ver las opciones disponibles
-                break;
-            case "2"://Retirar
-                monto = prompt("Introduce el monto a retirar");
-                transaccion(presentacion,monto);//funcion que evalua dos argumentos del usuario.
-                lista();
-                break;
-            case "3"://Depositar
-                monto = prompt("Introduce el monto a depositar");
-                transaccion(presentacion,monto);
-                lista();
-                break;
-            case "4"://Finalizar bucle
-                encendido = false;
-            break
-            default://Cualquier entrada fuera de las opciones
-                alert("Orden desconocida");
-                lista();
-                break;
+        else if(i == 5){
+            alert("Objeto no encontrado");
+        }
+        else{
+            alert("Buscando objeto");
         }
     }
 }
-function transaccion(orden,monto) //funcion principal para el control de la variable balance y revision de la entrada del usuario
-{
-    parseInt(monto)
-    if(monto == null || parseInt(monto)< 0)//Si la entrada del usuario(monto) esta vacia o es negativa.
-    {
-        alert("Favor de ingresar un monto mayor a 0");
-    }
-    else if (isNaN(monto) == true)//Si la entrada del usuario no es un numero
-    {
-        alert("Ingreso erroneo");
-    }
-    else if (orden == "2" && parseInt(monto) > balance )//Si la operacion del usuario es de orden 2(retiro) y su entrada(monto) es mayor al balance(su dinero guardado).
-    {
-        alert("Tu cuenta no tiene suficiente dinero para realizar el retiro correspondiente.");
-    }
-    else if(orden == "2")//Si la operacion del usuario es de orden 2(retiro)
-    {
-        balance -= monto;
-        alert("tu retiro ha sido realizado con exito, ahora tu balance es de " + balance);
-    }
-    else if(orden == "3")//Si la operacion del usuario es de orden 3(deposito)
-    {
-        balance += parseInt(monto);
-        alert("tu deposito ha sido realizado con exito, ahora tu balance es de " + balance);
-    }
-}
-function lista() //funcion para mostrar las opciones y recibir respuesta del usuario.
-{
-    switch(prompt(opciones))//En cada caso se llevara a la seccion correspondiente del bucle while.
-    {
-        case "1":
-            presentacion = "1";
-            break;
-        case "2":
-            presentacion = "2";
-            break;
-        case "3":
-            presentacion = "3";
-            break;
-        case "4"://termina la ejecucion del bucle.
-            encendido = false;
-            break;
-    }
-}
+function agregarObjeto(){
 
-function Registrados(usuario,contraseña){
-    if(registrados.usuario == usuario && registrados.contraseña == contraseña){
-        alert("Bienvenido " + usuario);
-        iniciado = true;
+}
+function cerrarMochila(){
+
+}
+function opciones(opcion){
+    switch(opcion)
+    {
+        case "1":
+        quitarObjeto();
+        break;
+        case "2":
+        agregarObjeto();
+        break;
+        case "3":
+        cerrarMochila();
+        break;
+
     }
-    else{
-        alert("Usuario o contraseña invalidos");
-        iniciar_crear_cuenta = prompt(inicio[1] + "\n¿Ya tienes una cuenta?\n1-Iniciar sesion\n2-Crear cuenta");
-        console.log(registrados);
-    }
-    
 }
