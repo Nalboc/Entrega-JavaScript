@@ -38,10 +38,11 @@ function agregarObjeto(){
     cosas_cargadas.length>=5?alert("Mochila llena"):cosas_cargadas.push(agregar) + alert(agregar + " agregado a tu mochila");
 }
 function cerrarMochila(){
-
+alert("Mochila cerrada")
+mochila_abierta = false;
 }
 function mirarMochila(){
-
+    alert("Estas son las cosas dentro de tu mochila: " + cosas_cargadas)
 }
 function opciones(opcion){
     switch(opcion)
@@ -58,6 +59,5 @@ function opciones(opcion){
         case "4":
         cerrarMochila();
         break;
-
     }
 }
