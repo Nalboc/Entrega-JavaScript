@@ -1,22 +1,26 @@
-const mochila = document.getElementById("mochila");
-const slot1 = document.getElementById("slot1");
-const slot2 = document.getElementById("slot2");
-const slot3 = document.getElementById("slot3");
-const slot4 = document.getElementById("slot4");
-const slot5 = document.getElementById("slot5");
+let mochila = document.getElementById("mochila");
+let slot1 = document.getElementById("slot1");
+let slot2 = document.getElementById("slot2");
+let slot3 = document.getElementById("slot3");
+let slot4 = document.getElementById("slot4");
+let slot5 = document.getElementById("slot5");
 mochila_abierta = true;
-mochila = {
-  espacio: 5,
-};
+localStorage.setItem("espacioMochila", 5);
+let espacioMochila = parseInt(localStorage.getItem("espacioMochila"));
 let cosas_cargadas = [];
-while (mochila.espacio > 0) {
+while (espacioMochila > 0) {
   let cargar_mochila = prompt(
     "Llena la mochila con lo que quieras\n Espacio de mochila: " +
-      mochila.espacio
+      espacioMochila
   );
-  mochila.espacio -= 1;
+  espacioMochila -= 1;
   cosas_cargadas.push(cargar_mochila);
 }
+slot1.innerHTML = cosas_cargadas[0];
+slot2.innerHTML = cosas_cargadas[1];
+slot3.innerHTML = cosas_cargadas[2];
+slot4.innerHTML = cosas_cargadas[3];
+slot5.innerHTML = cosas_cargadas[4];
 alert("Ya no hay espacio, estas son las cosas que cargaste: " + cosas_cargadas);
 administrarMochila();
 function administrarMochila() {
