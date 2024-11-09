@@ -1,5 +1,4 @@
 const botonIniciarSesion = document.getElementById("iniciarSesion");
-console.log(document.body.innerHTML);
 botonIniciarSesion.addEventListener("mousedown", () => {
   document.body.innerHTML = `<header>
         <h1>Inicia sesion</h1>
@@ -19,4 +18,12 @@ botonIniciarSesion.addEventListener("mousedown", () => {
 
     </footer>
     <script src="./js/app.js"></script>`;
+  const nombre = document.getElementById("nombre");
+  nombre.addEventListener("change", () => {
+    console.log(nombre.value);
+  });
+  const contraseña = document.getElementById("contraseña");
+  contraseña.addEventListener("change", () => {
+    console.log(contraseña.value);
+  });
 });
