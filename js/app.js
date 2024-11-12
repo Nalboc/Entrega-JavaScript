@@ -25,6 +25,8 @@ botonIniciarSesion.addEventListener("mousedown", () => {
 
     </footer>
     <script src="./js/app.js"></script>`;
+  const parrafoInicioErroneo = document.createElement("p");
+  parrafoInicioErroneo.textContent = "Nombre o contraseña equivocado";
   const enviar = document.getElementById("enviar");
   enviar.addEventListener("click", () => {
     const nombre = document.getElementById("nombre").value;
@@ -33,8 +35,12 @@ botonIniciarSesion.addEventListener("mousedown", () => {
     for (cuenta of cuentasRegistradasRecuperadas) {
       if (cuenta.nombre === nombre && cuenta.contraseña == contraseña) {
         console.log("sesion iniciada");
+        if (document.querySelector("header p")) {
+          document.querySelector("header p").remove("p");
+        }
       } else {
-        console.log(`No hubo coincidencias`);
+        console.log("Nombre o contraseña incorrecto");
+        document.querySelector("header").appendChild(parrafoInicioErroneo);
       }
     }
   });
@@ -45,4 +51,3 @@ function registrarse(nombre, contraseña) {
     contraseña: contraseña,
   });
 }
-//TODO: RESOLVER ARRAYS EN STORAGE, VISUALIZACION CORRECTA DEL STORAGE Y COMPROBACION DE NOMBRE Y CONTRASEÑA
