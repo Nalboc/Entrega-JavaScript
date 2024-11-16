@@ -5,9 +5,9 @@ localStorage.setItem("cuentasRegistradas", JSON.stringify(cuentasRegistradas));
 const cuentasRegistradasRecuperadas = JSON.parse(
   localStorage.getItem("cuentasRegistradas")
 );
-
-botonIniciarSesion.addEventListener("mousedown", () => {
-  document.body.innerHTML = `<header>
+if (document.getElementById("index")) {
+  botonIniciarSesion.addEventListener("mousedown", () => {
+    document.body.innerHTML = `<header>
         <h1>Inicia sesion</h1>
     </header>
     <main>
@@ -22,29 +22,29 @@ botonIniciarSesion.addEventListener("mousedown", () => {
         </form>
     </main>
     <footer>
-
     </footer>
     <script src="./js/app.js"></script>`;
-  const parrafoInicioErroneo = document.createElement("p");
-  parrafoInicioErroneo.textContent = "Nombre o contraseña equivocado";
-  const enviar = document.getElementById("enviar");
-  enviar.addEventListener("click", () => {
-    const nombre = document.getElementById("nombre").value;
-    const contraseña = document.getElementById("contraseña").value;
-    cuenta = { nombre: nombre, contraseña: contraseña };
-    for (cuenta of cuentasRegistradasRecuperadas) {
-      if (cuenta.nombre === nombre && cuenta.contraseña == contraseña) {
-        console.log("sesion iniciada");
-        if (document.querySelector("header p")) {
-          document.querySelector("header p").remove("p");
+    const parrafoInicioErroneo = document.createElement("p");
+    parrafoInicioErroneo.textContent = "Nombre o contraseña equivocado";
+    const enviar = document.getElementById("enviar");
+    enviar.addEventListener("click", () => {
+      const nombre = document.getElementById("nombre").value;
+      const contraseña = document.getElementById("contraseña").value;
+      cuenta = { nombre: nombre, contraseña: contraseña };
+      for (cuenta of cuentasRegistradasRecuperadas) {
+        if (cuenta.nombre === nombre && cuenta.contraseña == contraseña) {
+          console.log("sesion iniciada");
+          if (document.querySelector("header p")) {
+            document.querySelector("header p").remove("p");
+          }
+        } else {
+          console.log("Nombre o contraseña incorrecto");
+          document.querySelector("header").appendChild(parrafoInicioErroneo);
         }
-      } else {
-        console.log("Nombre o contraseña incorrecto");
-        document.querySelector("header").appendChild(parrafoInicioErroneo);
       }
-    }
+    });
   });
-});
+}
 function registrarse(nombre, contraseña) {
   cuentasRegistradasRecuperadas.push({
     nombre: nombre,
