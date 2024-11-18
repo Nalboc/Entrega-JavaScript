@@ -7,10 +7,10 @@ const cuentasRegistradasRecuperadas = JSON.parse(
 );
 if (document.getElementById("index")) {
   botonIniciarSesion.addEventListener("mousedown", () => {
-    document.body.innerHTML = `<header>
+    document.body.innerHTML = `<header class ="inicia-sesion">
         <h1>Inicia sesion</h1>
     </header>
-    <main>
+    <main class ="main-iniciosesion">
         <form class = "formulario">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre" required>
@@ -34,12 +34,12 @@ if (document.getElementById("index")) {
       for (cuenta of cuentasRegistradasRecuperadas) {
         if (cuenta.nombre === nombre && cuenta.contraseña == contraseña) {
           console.log("sesion iniciada");
-          if (document.querySelector("header p")) {
-            document.querySelector("header p").remove("p");
+          if (document.querySelector("main p")) {
+            document.querySelector("main p").remove("p");
           }
         } else {
           console.log("Nombre o contraseña incorrecto");
-          document.querySelector("header").appendChild(parrafoInicioErroneo);
+          document.querySelector("main").appendChild(parrafoInicioErroneo);
         }
       }
     });

@@ -31,6 +31,7 @@ header p{
 }
 main{
     height: 100%;
+    width: 100%;
 }
 main section{
 display: flex;
@@ -50,4 +51,34 @@ main section button{
 }
 footer{
     background-color: rgb(80, 127, 189);
+}
+
+.main-iniciosesion{
+    background-color:rgb(55, 70, 90);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.main-iniciosesion div{
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    width: 20%;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+.main-iniciosesion div button{
+    height: 30%;
+    width: 100%;
+    box-shadow: 0px 10px 30px 0px;
+}
+.inicia-sesion{
+    display: flex;
+    justify-content: center;
+}
+.main-iniciosesion p{
+    color: red;
+    font-size: 20px;
 }
