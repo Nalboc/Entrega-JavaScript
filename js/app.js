@@ -1,10 +1,11 @@
 const botonIniciarSesion = document.getElementById("iniciarSesion");
 let cuenta = { nombre: "", contraseña: "" };
-const cuentasRegistradas = [{ nombre: "p", contraseña: 1 }];
+const cuentasRegistradas = [{ nombre: "p", contraseña: 1, balance: 50 }];
 localStorage.setItem("cuentasRegistradas", JSON.stringify(cuentasRegistradas));
 const cuentasRegistradasRecuperadas = JSON.parse(
   localStorage.getItem("cuentasRegistradas")
 );
+let cuentaIniciada;
 if (document.getElementById("index")) {
   botonIniciarSesion.addEventListener("mousedown", () => {
     document.body.innerHTML = `<header class ="inicia-sesion">
@@ -37,6 +38,14 @@ if (document.getElementById("index")) {
           if (document.querySelector("main p")) {
             document.querySelector("main p").remove("p");
           }
+          cuentaIniciada = cuentasRegistradasRecuperadas.find(
+            (cuenta) => cuenta.nombre == nombre
+          );
+          const cuentaIniciadaActual = sessionStorage.setItem(
+            "cuentaIniciadaActual",
+            JSON.stringify(cuentaIniciada)
+          );
+          window.location.href = "./pages/pagina_inicio.html";
         } else {
           console.log("Nombre o contraseña incorrecto");
           document.querySelector("main").appendChild(parrafoInicioErroneo);
@@ -50,4 +59,10 @@ function registrarse(nombre, contraseña) {
     nombre: nombre,
     contraseña: contraseña,
   });
+}
+function cuentaActualIniciada(cuenta) {
+  document.querySelector("header p").textContent = `Nombre:${cuenta.nombre}`;
+  document.querySelector(
+    "header div p"
+  ).textContent = `Balance:${cuenta.balance}`;
 }
