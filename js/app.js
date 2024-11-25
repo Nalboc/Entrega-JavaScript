@@ -41,7 +41,7 @@ function RevisarInicioDeSesion(nombre, contraseña) {
         "cuentaIniciadaActual",
         JSON.stringify(cuentaIniciada)
       );
-      inicio();
+      cambiosDePagina(1);
     } else {
       //si los datos introducidos no coinciden a ninguna cuenta registrada, salta mensaje de error y aparece parrafoInicioErroneo.
       console.log("Nombre o contraseña incorrecto");
@@ -49,18 +49,32 @@ function RevisarInicioDeSesion(nombre, contraseña) {
     }
   }
 }
-function botonEnviar() {
+function botonEnviar(opcion) {
   //evento del boton "enviar" del formulario
   const enviar = document.getElementById("enviar");
   enviar.addEventListener("click", () => {
     //al clickearlo se guardan los datos dados por el usuario en sus respectivas variables(nombre y contraseña)
     const nombre = document.getElementById("nombre").value;
     const contraseña = document.getElementById("contraseña").value;
-    RevisarInicioDeSesion(nombre, contraseña);
+    if (opcion == 1) {
+      RevisarInicioDeSesion(nombre, contraseña);
+    } else {
+      registrarse(nombre, contraseña);
+      cambiosDePagina(2);
+    }
   });
 }
-function inicio() {
-  window.location.href = "./pages/pagina_inicio.html"; //cambia a la pagina de inicio
+function cambiosDePagina(opcion) {
+  switch (opcion) {
+    case 1:
+      window.location.href = "./pages/pagina_inicio.html"; //cambia a la pagina de inicio
+      break;
+    case 2:
+      window.location.href = "./index.html";
+      break;
+    case 3:
+      break;
+  }
 }
 //inicializacion variable que contiene un parrafo vacio y se le asigna un texto para luego mostrar al usuario en caso de error.
 const parrafoInicioErroneo = document.createElement("p");
@@ -86,16 +100,16 @@ if (document.getElementById("index")) {
   botonIniciarSesion.addEventListener("mousedown", () => {
     //al clickear cambia el html a uno con formulario
     mostrarFormulario();
-    botonEnviar();
+    botonEnviar(1);
   });
   botonRegistrarse.addEventListener("mousedown", () => {
     mostrarFormulario();
+    botonEnviar();
   });
 }
 
 function registrarse(nombre, contraseña) {
-  cuentasRegistradasRecuperadas.push({
-    nombre: nombre,
-    contraseña: contraseña,
-  });
+  const nuevaCuenta = { nombre: nombre, contraseña: contraseña, balance: 0 };
+  cuentasRegistradasRecuperadas.push(nuevaCuenta);
+  localStorage.setItem("cuentasRegistradas", cuentasRegistradasRecuperadas);
 }
