@@ -75,7 +75,10 @@ if (document.getElementById("index")) {
     });
   });
 }
-
+if (document.getElementById("inicio")) {
+  const parrafoNombre = document.getElementById("nombre");
+  parrafoNombre.textContent = `Nombre:`;
+}
 function registrarse(nombre, contraseña) {
   cuentasRegistradasRecuperadas.push({
     nombre: nombre,
