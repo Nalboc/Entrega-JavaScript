@@ -24,6 +24,9 @@ function mostrarFormulario() {
 }
 function RevisarInicioDeSesion(nombre, contraseña) {
   cuenta = { nombre: nombre, contraseña: contraseña };
+  let cuentasRegistradasRecuperadas = JSON.parse(
+    localStorage.getItem("cuentasRegistradas")
+  );
   //si los datos corresponden a los de una cuenta ya registrada, se inicia sesion.
   for (cuenta of cuentasRegistradasRecuperadas) {
     if (cuenta.nombre === nombre && cuenta.contraseña == contraseña) {
@@ -76,17 +79,14 @@ function cambiosDePagina(opcion) {
       break;
   }
 }
+document.addEventListener("DOMContentLoaded", inicializarStorage); //al terminar de cargar el dom, se inicializa el localStorage
 //inicializacion variable que contiene un parrafo vacio y se le asigna un texto para luego mostrar al usuario en caso de error.
 const parrafoInicioErroneo = document.createElement("p");
 parrafoInicioErroneo.textContent = "Nombre o contraseña equivocado";
 //variable que guarda el nombre y la contraseña introducida por el usuario más adelante
 let cuenta = { nombre: "", contraseña: "" };
 //las cuentas ya registradas
-const cuentasRegistradas = [{ nombre: "p", contraseña: 1, balance: 50 }];
-localStorage.setItem("cuentasRegistradas", JSON.stringify(cuentasRegistradas));
-const cuentasRegistradasRecuperadas = JSON.parse(
-  localStorage.getItem("cuentasRegistradas")
-);
+
 //cuenta que inició sesion actualmente.
 let cuentaIniciada;
 //Eventos para pagina de registro/inicio sesion(si existe index, funciona el codigo)
@@ -110,6 +110,24 @@ if (document.getElementById("index")) {
 
 function registrarse(nombre, contraseña) {
   const nuevaCuenta = { nombre: nombre, contraseña: contraseña, balance: 0 };
-  cuentasRegistradasRecuperadas.push(nuevaCuenta);
-  localStorage.setItem("cuentasRegistradas", cuentasRegistradasRecuperadas);
+
+  //Obtener el localStorage
+  let cuentasRegistradas =
+    JSON.parse(localStorage.getItem("cuentasRegistradas")) || []; // Use an empty array if nothing exists
+
+  //Ingresa la nueva cuenta al localStorage
+  cuentasRegistradas.push(nuevaCuenta);
+
+  // Guarda los cambios
+  localStorage.setItem(
+    "cuentasRegistradas",
+    JSON.stringify(cuentasRegistradas)
+  );
+}
+
+function inicializarStorage() {
+  //Inicializa el localStorage
+  if (!localStorage.getItem("cuentasRegistradas")) {
+    localStorage.setItem("cuentasRegistradas", JSON.stringify([]));
+  }
 }
