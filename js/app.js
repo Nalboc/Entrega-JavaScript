@@ -85,8 +85,6 @@ const parrafoInicioErroneo = document.createElement("p");
 parrafoInicioErroneo.textContent = "Nombre o contraseña equivocado";
 //variable que guarda el nombre y la contraseña introducida por el usuario más adelante
 let cuenta = { nombre: "", contraseña: "" };
-//las cuentas ya registradas
-
 //cuenta que inició sesion actualmente.
 let cuentaIniciada;
 //Eventos para pagina de registro/inicio sesion(si existe index, funciona el codigo)
@@ -110,14 +108,18 @@ if (document.getElementById("index")) {
 
 function registrarse(nombre, contraseña) {
   const nuevaCuenta = { nombre: nombre, contraseña: contraseña, balance: 0 };
-
   //Obtener el localStorage
   let cuentasRegistradas =
-    JSON.parse(localStorage.getItem("cuentasRegistradas")) || []; // Use an empty array if nothing exists
-
+    JSON.parse(localStorage.getItem("cuentasRegistradas")) || [];
   //Ingresa la nueva cuenta al localStorage
-  cuentasRegistradas.push(nuevaCuenta);
-
+  if (
+    cuentasRegistradas.some((cuenta) => cuenta.nombre === nuevaCuenta.nombre)
+  ) {
+    const parrafoInicioErroneoRegistro = document.createElement("p");
+    parrafoInicioErroneoRegistro.textContent = "Nombre o contraseña ya en uso";
+    document.querySelector("main").appendChild(parrafoInicioErroneoRegistro);
+    return; // Salir de la funcion si el nombre ya existe
+  }
   // Guarda los cambios
   localStorage.setItem(
     "cuentasRegistradas",
